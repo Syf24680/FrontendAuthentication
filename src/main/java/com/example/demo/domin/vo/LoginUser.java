@@ -1,10 +1,13 @@
 package com.example.demo.domin.vo;
 
 import com.example.demo.domin.User;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
-
+@AllArgsConstructor
+@NoArgsConstructor
 public class LoginUser implements UserDetails {
     private User user;
     //用来返回权限信息
