@@ -1,19 +1,26 @@
 package com.example.demo.domin.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.example.demo.domin.User;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginUser implements UserDetails {
+public class LoginUser implements UserDetails, Serializable {
+    private static final long serialVersionUID = 1L;
     private User user;
     //用来返回权限信息
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return new ArrayList<>();
     }
     //获取密码
     @Override

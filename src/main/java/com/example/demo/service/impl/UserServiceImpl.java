@@ -28,6 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User>implements Use
         }
         LoginUser loginUser =(LoginUser) authenticate.getPrincipal();
         String loginUserStr = JSON.toJSONString(loginUser);
+        System.out.println("Serialized LoginUser: " + loginUserStr);
         String jwt = JwtUtils.createJWT(loginUserStr, null);
         return jwt;
     }

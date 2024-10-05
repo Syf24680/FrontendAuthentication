@@ -31,18 +31,25 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String token=request.getHeader("Authorization");
         if (!StringUtils.hasText(token)){
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 设置401状态
-            response.getWriter().write("Token不存在");
+            response.getWriter().write("Token not exist");
             return; // 直接返回
+        }
+        // 去除可能的"Bearer "前缀
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
         }
         String loginUserStr=null;
         LoginUser loginUser=null;
         try{
             Claims claims= JwtUtils.parseJWT(token);
             loginUserStr=claims.getSubject();
+            System.out.println("LoginUser JSON from JWT: " + loginUserStr);
             loginUser= JSON.parseObject(loginUserStr,LoginUser.class);
+            System.out.println("Deserialized LoginUser: " + loginUser);
+            System.out.println("User inside LoginUser: " + loginUser.getUser());
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 设置401状态
-            response.getWriter().write("TOKEN 非法");
+            response.getWriter().write("TOKEN illegal");
             return;
         }
         Collection<? extends GrantedAuthority> authorities = loginUser.getAuthorities();

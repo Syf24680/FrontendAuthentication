@@ -56,7 +56,7 @@ public class JwtUtils {
         SecretKey secretKey=generalKey();
         return Jwts.parser()
                 .setSigningKey(secretKey)
-                .parseClaimsJwt(jwt)
+                .parseClaimsJws(jwt)
                 .getBody();
     }
 
