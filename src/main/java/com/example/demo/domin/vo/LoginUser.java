@@ -12,8 +12,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class LoginUser implements UserDetails, Serializable {
     private static final long serialVersionUID = 1L;
     private User user;
